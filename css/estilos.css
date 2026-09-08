@@ -1,0 +1,258 @@
+/* ============================================================
+   SONORA · Hoja de estilos
+   1. Sistema de diseño
+   2. Reinicio y base
+   3. Cabecera y menús
+   4. Contenido: promoción, secciones y tarjetas
+   5. Reproductor
+   6. Adaptación a pantallas grandes
+   ============================================================ */
+
+/* ---------- 1. SISTEMA DE DISEÑO ---------- */
+/* :root es la raíz del documento. Las variables definidas aquí
+   están disponibles en TODA la hoja de estilos. */
+:root {
+  /* Tres niveles de fondo dan profundidad sin usar sombras */
+  --fondo: #000000;
+  --fondo-2: #121212;
+  --fondo-3: #1f1f1f;
+  --fondo-4: #2a2a2a;
+
+  /* Dos niveles de texto: principal y secundario */
+  --texto: #ffffff;
+  --texto-suave: #a7a7a7;
+
+  /* Color de marca: se reserva para lo que se puede pulsar */
+  --marca: #17c964;
+  --marca-oscura: #12a552;
+
+  --borde: #2e2e2e;
+
+  /* Espaciados con nombre: se acaban los 13px al azar.
+     Usar siempre estos cuatro hace que todo quede alineado. */
+  --e1: 0.5rem; /*  8px */
+  --e2: 1rem; /* 16px */
+  --e3: 1.5rem; /* 24px */
+  --e4: 2.5rem; /* 40px */
+
+  --radio: 10px;
+  --radio-s: 6px;
+
+  /* Alturas de las zonas fijas. Se usan luego para reservar
+     el hueco del contenido y que nada quede tapado. */
+  --alto-cabecera: 56px;
+  --alto-menu: 64px;
+  --alto-reproductor: 62px;
+}
+
+/* ---------- 2. REINICIO Y BASE ---------- */
+
+/* Explicado en detalle en la lección 5. De momento: hace que
+   los tamaños que escribes sean los tamaños reales. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Los navegadores traen márgenes por defecto en títulos y
+   párrafos. Los quitamos para decidirlos nosotros. */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* system-ui usa la tipografía del sistema del usuario:
+     carga instantánea y aspecto nativo en cada plataforma. */
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--texto);
+  background: var(--fondo);
+
+  /* Reservamos abajo el hueco del reproductor y del menú fijo,
+     para que la última sección no quede tapada. */
+  padding-bottom: calc(var(--alto-menu) + var(--alto-reproductor));
+}
+
+/* Las listas del proyecto no llevan puntitos ni numeración */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Los enlaces heredan el color del texto y no van subrayados:
+   en una app, el subrayado azul rompe el diseño. Ojo: eso
+   obliga a que se distingan por otra cosa (posición, negrita). */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Las imágenes nunca desbordan su contenedor */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Los botones no heredan la tipografía por defecto: hay que
+   decírselo, o saldrán con la letra fea del sistema. */
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* NUNCA quites el foco sin poner otro: hay gente que navega
+   sin ratón y necesita ver dónde está. */
+:focus-visible {
+  outline: 3px solid var(--marca);
+  outline-offset: 2px;
+}
+
+/* ---------- 4. CONTENIDO ---------- */
+
+.contenido {
+  padding: var(--e2);
+}
+
+/* --- Tarjeta de promoción --- */
+.promo {
+  position: relative; /* para colocar dentro el botón de cerrar */
+  background: var(--fondo-3);
+  border-radius: var(--radio);
+  padding: var(--e3);
+  margin-bottom: var(--e4);
+}
+
+.promo-cerrar {
+  /* absolute lo saca del flujo normal y lo coloca respecto
+     al ancestro con position:relative, o sea, .promo */
+  position: absolute;
+  top: var(--e2);
+  right: var(--e2);
+  font-size: 1.25rem;
+  color: var(--texto-suave);
+  /* Área de pulsación mínima de 44px: por debajo de eso,
+     en un móvil se falla el objetivo constantemente. */
+  min-width: 44px;
+  min-height: 44px;
+}
+.promo-cerrar:hover {
+  color: var(--texto);
+}
+
+.promo-marca {
+  color: var(--marca);
+  font-weight: 600;
+  margin-bottom: var(--e2);
+}
+
+.promo-titulo {
+  /* clamp(mínimo, ideal, máximo): el texto crece con la
+     pantalla pero nunca se pasa ni se queda diminuto.
+     Es la forma moderna de hacer tipografía adaptable. */
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  line-height: 1.15;
+  margin-bottom: var(--e1);
+}
+
+.promo p {
+  color: var(--texto-suave);
+}
+
+.promo-acciones {
+  margin: var(--e3) 0;
+}
+
+.promo-letra-pequena {
+  font-size: 0.8125rem;
+}
+.promo-letra-pequena a {
+  text-decoration: underline;
+}
+
+/* --- Botones --- */
+.btn {
+  /* inline-block porque son enlaces (elementos en línea)
+     a los que queremos dar relleno y tamaño */
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px; /* píldora: un radio enorme */
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.btn-verde {
+  background: var(--marca);
+  color: #000; /* texto negro sobre verde: más contraste */
+}
+.btn-verde:hover {
+  background: var(--marca-oscura);
+}
+
+.btn-texto {
+  color: var(--texto);
+}
+.btn-texto:hover {
+  text-decoration: underline;
+}
+
+/* --- Secciones y tarjetas --- */
+.seccion {
+  margin-bottom: var(--e4);
+}
+
+.seccion-titulo {
+  font-size: 1.5rem;
+  margin-bottom: var(--e2);
+}
+
+.tarjeta-portada {
+  /* aspect-ratio mantiene la portada cuadrada aunque la
+     imagen original no lo sea. object-fit: cover recorta
+     en lugar de deformar: nunca estires una cara. */
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  width: 100%;
+  border-radius: var(--radio-s);
+  margin-bottom: var(--e1);
+}
+
+/* Las fotos de artista van redondas: misma tarjeta,
+   una clase extra. Así se reutiliza el código. */
+.tarjeta-redonda .tarjeta-portada {
+  border-radius: 50%;
+}
+
+.tarjeta-titulo {
+  font-size: 1rem;
+  font-weight: 600;
+  /* Si el título es largo, se corta con puntos suspensivos
+     en lugar de romper la rejilla. Las tres líneas van juntas. */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tarjeta-artista {
+  font-size: 0.875rem;
+  color: var(--texto-suave);
+}
