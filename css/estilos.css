@@ -256,3 +256,263 @@ button {
   font-size: 0.875rem;
   color: var(--texto-suave);
 }
+
+/* ---------- 3. CABECERA Y MENÚS ---------- */
+
+.cabecera {
+  /* fixed: se queda pegada a la ventana aunque se haga scroll.
+     Se sale del flujo normal, así que no ocupa sitio: por eso
+     luego hay que compensarlo con un padding en .contenido. */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20; /* por encima del contenido */
+
+  height: var(--alto-cabecera);
+  background: var(--fondo);
+  padding-inline: var(--e2);
+
+  display: flex;
+  align-items: center; /* centrado vertical */
+  justify-content: space-between; /* uno a cada extremo */
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.btn-menu {
+  font-size: 1.5rem;
+  line-height: 1;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* El contenido empieza por debajo de la cabecera fija */
+.contenido {
+  padding-top: calc(var(--alto-cabecera) + var(--e2));
+}
+
+/* --- Menú lateral a pantalla completa --- */
+.menu {
+  position: fixed;
+  /* inset: 0 es la forma corta de top/right/bottom/left: 0,
+     es decir, "ocupa toda la ventana" */
+  inset: 0;
+  z-index: 40;
+  background: var(--fondo);
+  padding: var(--e4) var(--e3);
+
+  display: flex;
+  flex-direction: column; /* los enlaces, uno debajo de otro */
+  gap: var(--e3);
+}
+
+/* El atributo hidden del HTML lo oculta. Como .menu tiene
+   display:flex, hay que decirlo expresamente o ganaría el flex. */
+.menu[hidden] {
+  display: none;
+}
+
+.menu-cerrar {
+  align-self: flex-end; /* solo este hijo se va a la derecha */
+  font-size: 1.75rem;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.menu ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e3);
+}
+
+.menu a {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.menu hr {
+  border: 0;
+  border-top: 2px solid var(--texto);
+  width: 24px;
+  margin: 0;
+}
+
+/* ---------- 5. REPRODUCTOR Y MENÚ INFERIOR ---------- */
+
+.reproductor {
+  position: fixed;
+  /* Justo encima del menú inferior, y con un poco de aire */
+  bottom: calc(var(--alto-menu) + 6px);
+  left: var(--e1);
+  right: var(--e1);
+  z-index: 20;
+
+  height: var(--alto-reproductor);
+  background: var(--fondo-4);
+  border-radius: var(--radio-s);
+  padding: var(--e1);
+
+  display: flex;
+  align-items: center;
+  gap: var(--e2);
+}
+
+.rep-portada {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex: 0 0 auto; /* no se encoge nunca */
+}
+
+.rep-texto {
+  flex: 1; /* se queda con el espacio sobrante */
+  /* ESTA LÍNEA ES LA CLAVE. Por defecto, un hijo flexible no
+     encoge por debajo del tamaño de su contenido, así que un
+     título largo empujaría los botones fuera de la pantalla.
+     min-width: 0 se lo permite, y entonces sí funcionan los
+     puntos suspensivos de abajo. */
+  min-width: 0;
+}
+
+.rep-titulo,
+.rep-artista {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rep-titulo {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+.rep-artista {
+  font-size: 0.8125rem;
+  color: var(--texto-suave);
+}
+
+.rep-btn {
+  font-size: 1.25rem;
+  flex: 0 0 auto;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Estado "me gusta" activo. aria-pressed lo pondrá el
+   JavaScript en la lección 11: el CSS solo reacciona. */
+.rep-btn[aria-pressed="true"] {
+  color: var(--marca);
+}
+
+/* --- Barra de progreso --- */
+.rep-progreso {
+  position: absolute;
+  left: var(--e1);
+  right: var(--e1);
+  bottom: 3px;
+  height: 3px;
+  background: var(--fondo-2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* El span de dentro es lo que crece. Su anchura la
+   cambiará JavaScript en la lección 13. */
+.rep-progreso span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--texto);
+}
+
+/* --- Menú inferior --- */
+.menu-inferior {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  height: var(--alto-menu);
+  background: var(--fondo-2);
+  border-top: 1px solid var(--borde);
+}
+
+.menu-inferior ul {
+  display: flex;
+  height: 100%;
+}
+
+.menu-inferior li {
+  flex: 1;
+} /* cuatro columnas iguales */
+
+.menu-inferior a {
+  /* Columna centrada: icono arriba, texto debajo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 100%;
+  font-size: 0.6875rem;
+  color: var(--texto-suave);
+}
+
+.menu-inferior .icono {
+  font-size: 1.25rem;
+}
+
+/* La pestaña actual se marca sola gracias al atributo
+   aria-current="page" que pusimos en el HTML. Sin clases
+   extra: el estado ya estaba en el marcado. */
+.menu-inferior a[aria-current="page"] {
+  color: var(--texto);
+}
+
+/* --- Carrusel horizontal --- */
+.carrusel {
+  display: grid;
+
+  /* grid-auto-flow: column pone TODO en una sola fila y va
+     creando columnas nuevas según hagan falta.
+     grid-auto-columns fija el ancho de cada una: 42% del
+     contenedor hace que se vea media tarjeta asomando. */
+  grid-auto-flow: column;
+  grid-auto-columns: 42%;
+
+  gap: var(--e2);
+
+  /* Permite desplazarse en horizontal */
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* El scroll se detiene "encajado" en cada tarjeta,
+     en lugar de quedarse a medias. Detalle pequeño que
+     hace que se sienta como una app nativa. */
+  scroll-snap-type: x mandatory;
+
+  /* Espacio a los lados para que la primera y la última
+     tarjeta no queden pegadas al borde de la pantalla */
+  padding-bottom: var(--e1);
+
+  /* Oculta la barra de desplazamiento sin impedir el gesto */
+  scrollbar-width: none;
+}
+.carrusel::-webkit-scrollbar {
+  display: none;
+}
+
+.carrusel > li {
+  scroll-snap-align: start;
+}
+
+/* --- Rejilla normal, para resultados de búsqueda --- */
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--e2);
+}
