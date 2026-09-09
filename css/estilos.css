@@ -524,7 +524,7 @@ button {
    180deg = de arriba abajo. Las tres paradas dicen: color
    intenso arriba, negro a los 340 píxeles, negro el resto. */
 .contenido-cancion {
-  background: linear-gradient(180deg, #7a1f1f 0%, var(--fondo) 340px);
+  background: linear-gradient(180deg, #1a2b4c 0%, var(--fondo) 340px);
 }
 
 .ficha {
@@ -568,4 +568,139 @@ button {
 .ficha-datos {
   font-size: 0.875rem;
   color: var(--texto-suave);
+}
+
+.ficha-acciones {
+  display: flex;
+  align-items: center;
+  gap: var(--e3);
+  margin-top: var(--e1);
+}
+
+.accion {
+  font-size: 1.5rem;
+  color: var(--texto-suave);
+  min-width: 44px;
+  min-height: 44px;
+}
+.accion:hover {
+  color: var(--texto);
+}
+.accion[aria-pressed="true"] {
+  color: var(--marca);
+}
+
+.play-grande {
+  /* margin-left: auto empuja este botón, y solo este, hasta
+     el extremo derecho. Es el truco de Flexbox más útil que
+     existe: se come todo el espacio sobrante por la izquierda. */
+  margin-left: auto;
+
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--marca);
+  color: #000;
+  font-size: 1.375rem;
+
+  /* Centrado perfecto del triángulo, en dos líneas */
+  display: grid;
+  place-items: center;
+
+  /* La transición suaviza el cambio de tamaño al pasar
+     por encima. 120ms es imperceptible pero se nota. */
+  transition:
+    transform 120ms ease,
+    background 120ms ease;
+}
+
+.play-grande:hover {
+  transform: scale(1.06);
+  background: #22e074;
+}
+
+/* Respeta a quien ha pedido en su sistema que no haya
+   animaciones. Es una línea y evita mareos reales. */
+@media (prefers-reduced-motion: reduce) {
+  .play-grande {
+    transition: none;
+  }
+  .play-grande:hover {
+    transform: none;
+  }
+}
+
+/* Fondo blanco sobre tema oscuro: llama muchísimo la atención.
+   Justo por eso se usa una sola vez por pantalla. */
+.aviso {
+  background: var(--texto);
+  color: var(--fondo);
+  border-radius: var(--radio);
+  padding: var(--e3);
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--e3);
+}
+
+.aviso-texto {
+  font-size: 1.125rem;
+  font-weight: 700;
+  max-width: 32ch; /* ch = ancho de un carácter.
+                                       Limitar a 30-40 caracteres por
+                                       línea es lo que más mejora la
+                                       legibilidad de un texto. */
+}
+
+/* Este patrón se repite en toda la app: miniatura, dos líneas
+   de texto y una acción a la derecha. Escríbelo una vez y
+   reutilízalo en recomendaciones, resultados y biblioteca. */
+.filas {
+  display: flex;
+  flex-direction: column;
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  gap: var(--e2);
+  padding-block: var(--e1);
+  transition: background 0.2s ease;
+  padding: var(--e1);
+  border-radius: var(--radio-s);
+}
+
+.fila:hover {
+  background: var(--fondo-3);
+  cursor: pointer;
+}
+
+.fila-portada {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex: 0 0 auto;
+}
+
+.fila-texto {
+  flex: 1;
+  min-width: 0;
+} /* otra vez el truco */
+
+.fila-titulo {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fila-sub {
+  font-size: 0.875rem;
+  color: var(--texto-suave);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
