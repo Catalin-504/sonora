@@ -516,3 +516,56 @@ button {
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: var(--e2);
 }
+
+/* --- Ficha de canción --- */
+
+/* El degradado va en el contenedor, no en la ficha, para que
+   llegue hasta el borde superior de la pantalla.
+   180deg = de arriba abajo. Las tres paradas dicen: color
+   intenso arriba, negro a los 340 píxeles, negro el resto. */
+.contenido-cancion {
+  background: linear-gradient(180deg, #7a1f1f 0%, var(--fondo) 340px);
+}
+
+.ficha {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e2);
+  padding-block: var(--e3);
+}
+
+.ficha-portada {
+  width: min(65%, 280px); /* el menor de los dos: nunca gigante */
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  align-self: center; /* solo esta imagen se centra */
+  border-radius: 4px;
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.55);
+}
+
+.ficha-titulo {
+  font-size: clamp(1.75rem, 7vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.ficha-artista {
+  display: flex;
+  align-items: center;
+  gap: var(--e1);
+  font-weight: 600;
+  width: fit-content; /* el enlace no ocupa toda la fila */
+}
+.ficha-artista img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+.ficha-artista:hover span {
+  text-decoration: underline;
+}
+
+.ficha-datos {
+  font-size: 0.875rem;
+  color: var(--texto-suave);
+}

@@ -1,63 +1,134 @@
-<main class="contenido contenido-cancion">
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Ficha de canción en Sonora." />
+    <title>Sonora · Canción</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+  <body>
+    <header class="cabecera">
+      <a class="logo" href="index.html">Sonora</a>
+      <button
+        type="button"
+        class="btn-menu"
+        id="btn-menu"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="menu"
+      >
+        ☰
+      </button>
+    </header>
 
-  <article class="ficha">
+    <div class="menu" id="menu" hidden>
+      <button
+        type="button"
+        class="menu-cerrar"
+        id="menu-cerrar"
+        aria-label="Cerrar menú"
+      >
+        ✕
+      </button>
+      <nav aria-label="Menú de cuenta">
+        <ul>
+          <li><a href="login.html">Iniciar sesión</a></li>
+          <li><a href="registro.html">Regístrate</a></li>
+          <li><hr /></li>
+          <li><a href="planes.html">Planes</a></li>
+          <li><a href="ayuda.html">Ayuda</a></li>
+          <li><a href="privacidad.html">Privacidad</a></li>
+          <li><a href="condiciones.html">Condiciones</a></li>
+        </ul>
+      </nav>
+    </div>
 
-    <img class="ficha-portada" src="img/amanecer.jpg"
-         alt="Portada de Amanecer" width="400" height="400">
+    <main class="contenido contenido-cancion">
+      <article class="ficha">
+        <img
+          class="ficha-portada"
+          src="img/amanecer.jpg"
+          alt="Portada de Amanecer"
+          width="400"
+          height="400"
+        />
 
-    <h1 class="ficha-titulo">Amanecer</h1>
+        <h1 class="ficha-titulo">Amanecer</h1>
 
-    <a class="ficha-artista" href="artista.html">
-      <img src="img/marea.jpg" alt="" width="32" height="32">
-      <span>Marea Baja</span>
-    </a>
+        <a class="ficha-artista" href="artista.html">
+          <img src="img/marea.jpg" alt="" width="32" height="32" />
+          <span>Marea Baja</span>
+        </a>
 
-    <p class="ficha-datos">
-      Lunes al sol · 2026 · <time datetime="PT3M42S">3:42</time>
-    </p>
+        <p class="ficha-datos">
+          Lunes al sol · 2026 · <time datetime="PT3M42S">3:42</time>
+        </p>
 
-    <div class="ficha-acciones">
-      <button type="button" class="accion"
-              aria-label="Me gusta" aria-pressed="false">♡</button>
-      <button type="button" class="accion"
-              aria-label="Más opciones">⋯</button>
+        <div class="ficha-acciones">
+          <button
+            type="button"
+            class="accion"
+            aria-label="Me gusta"
+            aria-pressed="false"
+          >
+            ♡
+          </button>
+          <button type="button" class="accion" aria-label="Más opciones">
+            ⋯
+          </button>
 
-      <!-- El botón grande. Va el último en el HTML y el CSS lo
+          <!-- El botón grande. Va el último en el HTML y el CSS lo
            empuja a la derecha: así el orden de tabulación
            coincide con el orden visual. -->
-      <button type="button" class="play-grande" id="btn-play-ficha"
-              aria-label="Reproducir Amanecer">▶</button>
-    </div>
-
-  </article>
-
-  <section class="seccion">
-    <h2 class="seccion-titulo">Letra</h2>
-
-    <div class="aviso">
-      <p class="aviso-texto">
-        Inicia sesión para ver la letra y escuchar la canción completa
-      </p>
-      <a class="btn btn-verde" href="registro.html">Regístrate</a>
-    </div>
-  </section>
-
-  <section class="seccion">
-    <h2 class="seccion-titulo">Recomendaciones</h2>
-    <ul class="filas">
-
-      <li class="fila">
-        <img class="fila-portada" src="img/cieloraso.jpg" alt=""
-             width="56" height="56" loading="lazy">
-        <div class="fila-texto">
-          <p class="fila-titulo">Cielo raso</p>
-          <p class="fila-sub">Nieve Suelta</p>
+          <button
+            type="button"
+            class="play-grande"
+            id="btn-play-ficha"
+            aria-label="Reproducir Amanecer"
+          >
+            ▶
+          </button>
         </div>
-        <button type="button" class="accion"
-                aria-label="Reproducir Cielo raso">▶</button>
-      </li>
+      </article>
 
-    </ul>
-  </section>
+      <section class="seccion">
+        <h2 class="seccion-titulo">Letra</h2>
 
-</main>
+        <div class="aviso">
+          <p class="aviso-texto">
+            Inicia sesión para ver la letra y escuchar la canción completa
+          </p>
+          <a class="btn btn-verde" href="registro.html">Regístrate</a>
+        </div>
+      </section>
+
+      <section class="seccion">
+        <h2 class="seccion-titulo">Recomendaciones</h2>
+        <ul class="filas">
+          <li class="fila">
+            <img
+              class="fila-portada"
+              src="img/cieloraso.jpg"
+              alt=""
+              width="56"
+              height="56"
+              loading="lazy"
+            />
+            <div class="fila-texto">
+              <p class="fila-titulo">Cielo raso</p>
+              <p class="fila-sub">Nieve Suelta</p>
+            </div>
+            <button
+              type="button"
+              class="accion"
+              aria-label="Reproducir Cielo raso"
+            >
+              ▶
+            </button>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
