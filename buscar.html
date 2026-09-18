@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sonora · Buscar</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+
+  <body>
+    <main class="contenido">
+      <h1 class="titulo-pagina">Buscar</h1>
+
+      <form class="buscador" role="search" id="form-buscar">
+        <label class="visualmente-oculto" for="q">Buscar música</label>
+        <span class="buscador-icono" aria-hidden="true">⌕</span>
+        <input
+          type="search"
+          id="q"
+          name="q"
+          placeholder="¿Qué te apetece escuchar?"
+          autocomplete="off"
+        />
+      </form>
+
+      <!-- Vacío por ahora: lo rellenará JavaScript -->
+      <section class="seccion">
+        <ul class="rejilla" id="resultados"></ul>
+        <p class="mensaje" id="mensaje"></p>
+      </section>
+    </main>
+
+    <footer class="pie">
+      <div class="pie-columnas">
+        <div>
+          <h2 class="pie-titulo">Proyecto</h2>
+          <ul>
+            <li><a href="#">Acerca de</a></li>
+            <li><a href="#">Cómo está hecho</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="pie-titulo">Comunidad</h2>
+          <ul>
+            <li><a href="#">Para artistas</a></li>
+            <li><a href="#">Licencias de la música</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="pie-titulo">Enlaces útiles</h2>
+          <ul>
+            <li><a href="#">Ayuda</a></li>
+            <li><a href="#">Accesibilidad</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pie-legal">
+        <p>Proyecto formativo. Música con licencia libre.</p>
+        <p>© 2026 Sonora</p>
+      </div>
+    </footer>
+
+    <script src="js/datos.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

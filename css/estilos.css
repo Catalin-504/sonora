@@ -704,3 +704,231 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.titulo-pagina {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: var(--e2);
+}
+
+.buscador {
+  position: relative;
+  margin-bottom: var(--e4);
+}
+
+.buscador input {
+  width: 100%;
+  /* Relleno extra a la izquierda para dejar sitio al icono */
+  padding: 0.875rem 1rem 0.875rem 3rem;
+  border: 0;
+  border-radius: var(--radio-s);
+  background: var(--texto);
+  color: var(--fondo);
+  font-size: 1rem;
+}
+
+/* El texto de ayuda del campo, más flojo que el texto real */
+.buscador input::placeholder {
+  color: #6b6b6b;
+}
+
+.buscador-icono {
+  position: absolute;
+  left: 1rem;
+  /* Centrado vertical clásico: bajar al 50% y subir la
+     mitad de la propia altura */
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--fondo);
+  font-size: 1.25rem;
+}
+
+/* Oculta a la vista pero NO para los lectores de pantalla.
+   display:none los ocultaría también a ellos, y entonces el
+   campo se quedaría sin nombre. Esta clase es un clásico:
+   la vas a copiar en todos tus proyectos. */
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.mensaje {
+  color: var(--texto-suave);
+}
+
+.pie {
+  background: var(--fondo-2);
+  padding: var(--e4) var(--e2);
+  margin-top: var(--e4);
+}
+
+/* En móvil, una columna. Cuando quepan, varias, sin
+   media query: minmax + auto-fit se encargan. */
+.pie-columnas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--e4) var(--e3);
+}
+
+.pie-titulo {
+  font-size: 1rem;
+  margin-bottom: var(--e2);
+}
+
+.pie ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e1);
+}
+
+.pie a {
+  color: var(--texto-suave);
+}
+.pie a:hover {
+  color: var(--texto);
+  text-decoration: underline;
+}
+
+.pie-legal {
+  margin-top: var(--e4);
+  padding-top: var(--e3);
+  border-top: 1px solid var(--borde);
+  color: var(--texto-suave);
+  font-size: 0.8125rem;
+
+  display: flex;
+  flex-wrap: wrap; /* si no caben, saltan de línea */
+  justify-content: space-between;
+  gap: var(--e1);
+}
+
+/* ---------- 6. PANTALLAS GRANDES ----------
+   Todo lo de arriba es la versión móvil. Aquí solo AÑADIMOS
+   cuando hay más sitio. 48rem son 768px: tabletas y superiores. */
+
+@media (min-width: 48rem) {
+  /* El contenido deja de ocupar todo el ancho: leer líneas de
+     1400 píxeles es incomodísimo. margin-inline: auto lo centra. */
+  .contenido {
+    max-width: 1100px;
+    margin-inline: auto;
+    padding-inline: var(--e3);
+  }
+
+  /* En el carrusel caben más tarjetas y más pequeñas */
+  .carrusel {
+    grid-auto-columns: 200px;
+  }
+
+  /* La ficha de canción pasa a dos columnas: portada a la
+     izquierda, datos a la derecha alineados abajo */
+  .ficha {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    align-items: end;
+    column-gap: var(--e4);
+  }
+  .ficha-portada {
+    width: 100%;
+    /* grid-row: 1 / -1 hace que la portada ocupe todas las
+       filas de la primera columna */
+    grid-row: 1 / -1;
+    align-self: center;
+  }
+
+  /* El aviso deja de ser una columna y pasa a fila */
+  .aviso {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+/* A partir de 64rem (1024px) el reproductor deja de flotar
+   y ocupa todo el ancho, como en la versión de escritorio. */
+@media (min-width: 64rem) {
+  .reproductor {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+    height: 72px;
+    background: var(--fondo-2);
+    border-top: 1px solid var(--borde);
+  }
+
+  /* En escritorio el menú inferior no tiene sentido */
+  .menu-inferior {
+    display: none;
+  }
+
+  body {
+    padding-bottom: 72px;
+  }
+}
+
+/* Sintaxis: transition: propiedad duración curva retraso; */
+
+.tarjeta {
+  transform: translateY(0);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Curvas habituales:
+   ease     → arranca rápido, frena al final (la más natural)
+   linear   → velocidad constante (poco natural)
+   ease-in  → arranca despacio
+   ease-out → frena al final */
+
+/* 1. Definir la animación */
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 2. Aplicarla a un elemento */
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--line);
+  border-top-color: var(--p1);
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+
+/* Pulsación suave para el botón de play mientras suena */
+@keyframes pulso {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.btn-play.sonando {
+  animation: pulso 2s ease-in-out infinite;
+}
+
+.no-scroll {
+  /* EJ 1 */
+  overflow: hidden;
+}
