@@ -78,8 +78,10 @@ function crearTarjeta(cancion) {
         <h3 class="tarjeta-titulo">${cancion.titulo}</h3>
       </a>
       <p class="tarjeta-artista">${cancion.artista}</p>
-    </article>
-  `;
+    <button type="button" class="btn-play-tarjeta"
+            aria-label="Reproducir ${cancion.titulo}">▶</button>
+  </article>
+`;
 
   return $li;
 }
@@ -93,7 +95,6 @@ function pintarLista($contenedor, canciones) {
   $contenedor.replaceChildren(fragmento);
 }
 
-// Pintar las tendencias al cargar la página de inicio
 const $tendencias = document.querySelector("#lista-tendencias");
 pintarLista($tendencias, CANCIONES);
 
@@ -109,8 +110,6 @@ const $mensaje = document.querySelector("#mensaje");
  * contengan el texto buscado.
  */
 function buscarCanciones(texto) {
-  // Normalizamos: sin espacios sobrantes y en minúsculas, para
-  // que "MAREA" y "  marea " encuentren lo mismo.
   const t = texto.trim().toLowerCase();
   if (t === "") return [];
 
@@ -156,3 +155,34 @@ $formBuscar?.addEventListener("submit", (e) => {
 
 // Estado inicial al abrir la página de búsqueda
 if ($campo) mostrarBusqueda("");
+
+/* ---------- 6. FICHA DE CANCIÓN ---------- */
+
+function formatearTiempo(totalSegundos) {
+  const minutos = Math.floor(totalSegundos / 60);
+  const segundos = totalSegundos % 60;
+  return `${minutos}:${segundos.toString().padStart(2, "0")}`; /* he creado esta función */
+}
+
+const $ficha = document.querySelector(".ficha");
+
+if ($ficha) {
+  const params = new URLSearchParams(location.search);
+  const id = Number(params.get("id")) || 1;
+
+  const cancion = CANCIONES.find((c) => c.id === id);
+
+  if (!cancion) {
+    $ficha.innerHTML = "<p>Esta canción no existe.</p>";
+  } else {
+    $ficha.dataset.cancionId = cancion.id;
+
+    document.querySelector(".ficha-portada").src = cancion.portada;
+    document.querySelector(".ficha-titulo").textContent = cancion.titulo;
+    document.querySelector(".ficha-artista span").textContent = cancion.artista;
+    document.querySelector(".ficha-datos").textContent =
+      `${cancion.album} · ${cancion.anio} · ${formatearTiempo(cancion.duracion)}`;
+
+    document.title = `${cancion.titulo} · Sonora`;
+  }
+}

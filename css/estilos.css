@@ -1,16 +1,5 @@
-/* ============================================================
-   SONORA · Hoja de estilos
-   1. Sistema de diseño
-   2. Reinicio y base
-   3. Cabecera y menús
-   4. Contenido: promoción, secciones y tarjetas
-   5. Reproductor
-   6. Adaptación a pantallas grandes
-   ============================================================ */
-
 /* ---------- 1. SISTEMA DE DISEÑO ---------- */
-/* :root es la raíz del documento. Las variables definidas aquí
-   están disponibles en TODA la hoja de estilos. */
+
 :root {
   /* Tres niveles de fondo dan profundidad sin usar sombras */
   --fondo: #000000;
@@ -809,8 +798,6 @@ button {
 }
 
 /* ---------- 6. PANTALLAS GRANDES ----------
-   Todo lo de arriba es la versión móvil. Aquí solo AÑADIMOS
-   cuando hay más sitio. 48rem son 768px: tabletas y superiores. */
 
 @media (min-width: 48rem) {
   /* El contenido deja de ocupar todo el ancho: leer líneas de
@@ -887,12 +874,6 @@ button {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* Curvas habituales:
-   ease     → arranca rápido, frena al final (la más natural)
-   linear   → velocidad constante (poco natural)
-   ease-in  → arranca despacio
-   ease-out → frena al final */
-
 /* 1. Definir la animación */
 @keyframes girar {
   from {
@@ -931,4 +912,29 @@ button {
 .no-scroll {
   /* EJ 1 */
   overflow: hidden;
+}
+
+
+.tarjeta { position: relative; }
+
+.btn-play-tarjeta {
+  position: absolute;
+  right: 8px;
+  bottom: 58px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--marca);
+  color: #000;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.tarjeta:hover .btn-play-tarjeta,
+.tarjeta:focus-within .btn-play-tarjeta { opacity: 1; }
+
+@media (hover: none) {
+  .btn-play-tarjeta { opacity: 1; }
 }
